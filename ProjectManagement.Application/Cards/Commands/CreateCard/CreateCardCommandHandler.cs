@@ -6,14 +6,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using ProjectManagement.Domain.Models;
 using ProjectManagement.Application.Common;
-
+using ProjectManagement.Domain.Repositories;
 
 namespace ProjectManagement.Application.Cards.Commands.CreateCard
 {
     class CreateCardCommandHandler : IRequestHandler<CreateCardCommand, string>
     {
-        private readonly IRepository<Card> _repository;
-        public CreateCardCommandHandler(IRepository<Card> repository)
+        private readonly ICardRepository _repository;
+        public CreateCardCommandHandler(ICardRepository repository)
         {
             _repository = repository;
         }

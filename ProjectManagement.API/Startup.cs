@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ProjectManagement.Application;
 using ProjectManagement.Infrastructure;
-using ProjectManagement.Persistence;
+
 
 namespace ProjectManagement.API
 {
@@ -30,9 +30,10 @@ namespace ProjectManagement.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddInfrastructure(Configuration, Environment);
-            services.AddPersistence(Configuration);
             services.AddApplication();
+            services.AddInfrastructure(Configuration, Environment);
+       
+       
            
             services.AddHealthChecks();
             services.AddControllers();
@@ -55,7 +56,11 @@ namespace ProjectManagement.API
              .AllowAnyOrigin()
              .AllowAnyMethod()
              .AllowAnyHeader());
+
+            app.UseAuthentication();
+
             app.UseAuthorization();
+
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
