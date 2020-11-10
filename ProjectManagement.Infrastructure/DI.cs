@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.AspNetCore.Hosting;
 using ProjectManagement.Domain.Repositories;
 using ProjectManagement.Infrastructure.Repositories;
+using ProjectManagement.Application.Common.Interfaces;
 
 namespace ProjectManagement.Infrastructure
 {
@@ -22,6 +23,8 @@ namespace ProjectManagement.Infrastructure
             });
 
             services.AddScoped<ICardRepository, CardRepository>();
+            services.AddScoped(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
+
 
             return services;
         }

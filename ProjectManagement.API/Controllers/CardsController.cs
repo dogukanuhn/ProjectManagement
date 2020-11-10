@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Application.Cards.Commands.CreateCard;
+using ProjectManagement.Application.Cards.Queries.GetAllCards;
 
 namespace ProjectManagement.API.Controllers
 {
@@ -15,15 +16,17 @@ namespace ProjectManagement.API.Controllers
     {
         private readonly IMediator _mediator;
 
-        public CardsController(IMediator mediator)
+        protected CardsController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-
-        protected IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return Ok();
+            var list = await _mediator.Send(new GetCardListQuery());
+
+            return Ok(list);
         }
 
         [HttpPost]
