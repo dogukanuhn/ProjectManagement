@@ -73,7 +73,7 @@ namespace ProjectManagement.API
                        ValidateAudience = false
                    };
                });
-
+            services.AddHttpContextAccessor();
             services.AddHealthChecks();
             services.AddControllers();
             services.AddSwaggerGen(c => {

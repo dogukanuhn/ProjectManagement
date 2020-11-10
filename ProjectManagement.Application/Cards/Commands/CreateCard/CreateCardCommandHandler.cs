@@ -7,15 +7,20 @@ using System.Threading.Tasks;
 using ProjectManagement.Domain.Models;
 using ProjectManagement.Application.Common;
 using ProjectManagement.Domain.Repositories;
+using System.Security.Claims;
+using ProjectManagement.Domain.Common;
 
 namespace ProjectManagement.Application.Cards.Commands.CreateCard
 {
     class CreateCardCommandHandler : IRequestHandler<CreateCardCommand, string>
     {
         private readonly ICardRepository _repository;
-        public CreateCardCommandHandler(ICardRepository repository)
+        private readonly IApplicationUser _applicationUser;
+
+        public CreateCardCommandHandler(ICardRepository repository, IApplicationUser applicationUser)
         {
             _repository = repository;
+            _applicationUser = applicationUser;
         }
 
         public async Task<string> Handle(CreateCardCommand request, CancellationToken cancellationToken)
@@ -23,7 +28,7 @@ namespace ProjectManagement.Application.Cards.Commands.CreateCard
             var entity = new Card
             {
                 Content = request.Content,
-                CreatedBy = request.CreatedBy,
+                CreatedBy = _applicationUser.Email,
                 IsDone = request.IsDone,
                 Title = request.Title,
                 Created=DateTime.Now

@@ -22,7 +22,7 @@ namespace ProjectManagement.Application.Users.Queries
 
         public async Task<(string email, string token)?> Handle(AuthenticateUserQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetAsync(x => x.FirstName == request.Email && x.Password == request.Password);
+            var user = await _userRepository.GetAsync(x => x.Email == request.Email && x.Password == request.Password);
 
             if (user == null)
                 return null;

@@ -13,7 +13,8 @@ namespace ProjectManagement.Application
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddScoped<IJwtHandler, JwtHandler>();
-     
+            services.AddScoped<IApplicationUser, ApplicationUser>();
+
             return services;
         }
     }
