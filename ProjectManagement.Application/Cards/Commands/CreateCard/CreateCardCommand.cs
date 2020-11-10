@@ -11,6 +11,11 @@ namespace ProjectManagement.Application.Cards.Commands.CreateCard
         public string Content { get; set; }
         public string Title { get; set; }
         public bool IsDone { get; set; }
+        public DateTime ExpireTime { get; set; }
+        public string NotificationEmail { get; set; }
+        public CreateCardCommand() { 
+            IsDone = false;
 
+        }
     }
 }

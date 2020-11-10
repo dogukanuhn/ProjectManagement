@@ -23,5 +23,11 @@ namespace ProjectManagement.Domain.Models
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         public DateTime? LastModified { get; set; }
 
+        [BsonRepresentation(BsonType.DateTime)]
+        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
+        public DateTime ExpireTime { get; set; }
+
+        public string NotificationEmail { get; set; }
+
     }
 }

@@ -25,13 +25,16 @@ namespace ProjectManagement.Application.Cards.Commands.CreateCard
 
         public async Task<string> Handle(CreateCardCommand request, CancellationToken cancellationToken)
         {
+            var userMail = _applicationUser.Email;
             var entity = new Card
             {
                 Content = request.Content,
-                CreatedBy = _applicationUser.Email,
+                CreatedBy = userMail,
                 IsDone = request.IsDone,
                 Title = request.Title,
-                Created=DateTime.Now
+                Created = DateTime.Now,
+                ExpireTime = request.ExpireTime,
+                NotificationEmail = string.IsNullOrEmpty(request.NotificationEmail) ? userMail : request.NotificationEmail
             };
 
             await _repository.AddAsync(entity, cancellationToken);
