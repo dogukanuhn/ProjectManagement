@@ -22,6 +22,8 @@ namespace ProjectManagement.Infrastructure
                     .GetSection(nameof(MongoDbSettings) + ":" + MongoDbSettings.DatabaseValue).Value;
             });
 
+            services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddScoped<ICardRepository, CardRepository>();
             services.AddScoped(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
 

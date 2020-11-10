@@ -1,12 +1,12 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectManagement.Domain.Models
+namespace ProjectManagement.Application.Users.Commands.CreateUser
 {
-    public class User
+    public class CreateUserCommand : IRequest<bool>
     {
-        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
