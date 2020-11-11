@@ -2,31 +2,52 @@
 using MailKit.Security;
 using MimeKit;
 using MimeKit.Text;
-using ProjectManagement.Domain.Common;
-
+using ProjectManagement.Application.Common.Interfaces;
+using ProjectManagement.Application.Model;
+using System.Linq;
 
 namespace ProjectManagement.Application.Services
 {
     public class EmailService : IEmailService
     {
-     
-            public void Send(string from, string to, string subject, string html)
-            {
-                // create message
-                var email = new MimeMessage();
-                email.From.Add(MailboxAddress.Parse(from));
-                email.To.Add(MailboxAddress.Parse(to));
-                email.Subject = subject;
-                email.Body = new TextPart(TextFormat.Html) { Text = html };
+        private readonly IEmailConfig _emailConfiguration;
 
-                    // send email
-                    using var smtp = new SmtpClient();
-                    smtp.Connect("localhost", 25, SecureSocketOptions.StartTls);
-            
-                    smtp.Send(email);
-                    smtp.Disconnect(true);
-
+        public EmailService(IEmailConfig emailConfiguration)
+        {
+            _emailConfiguration = emailConfiguration;
         }
-        
-    }
+
+
+
+		public void Send(EmailMessage emailMessage)
+		{
+			var message = new MimeMessage();
+			message.To.AddRange(emailMessage.ToAddresses.Select(x => new MailboxAddress(x.Name, x.Address)));
+			message.From.AddRange(emailMessage.FromAddresses.Select(x => new MailboxAddress(x.Name, x.Address)));
+
+			message.Subject = emailMessage.Subject;
+			//We will say we are sending HTML. But there are options for plaintext etc. 
+			message.Body = new TextPart(TextFormat.Html)
+			{
+				Text = emailMessage.Content
+			};
+
+			//Be careful that the SmtpClient class is the one from Mailkit not the framework!
+			using (var emailClient = new SmtpClient())
+			{
+				//The last parameter here is to use SSL (Which you should!)
+				emailClient.Connect(_emailConfiguration.SmtpServer, _emailConfiguration.SmtpPort, true);
+				
+				//Remove any OAuth functionality as we won't be using it. 
+				emailClient.AuthenticationMechanisms.Remove("XOAUTH2");
+
+				emailClient.Authenticate(_emailConfiguration.SmtpUsername, _emailConfiguration.SmtpPassword);
+
+				emailClient.Send(message);
+
+				emailClient.Disconnect(true);
+			}
+
+		}
+	}
 }

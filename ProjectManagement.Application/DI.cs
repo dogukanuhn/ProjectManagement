@@ -3,8 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using ProjectManagement.Domain.Common;
 using ProjectManagement.Application.Common.Helpers;
-using Microsoft.Extensions.Hosting;
-using ExpiredCardNotificationService;
+using ProjectManagement.Application.Common.Interfaces;
+using ProjectManagement.Application.Services;
 
 namespace ProjectManagement.Application
 {
@@ -14,9 +14,11 @@ namespace ProjectManagement.Application
         {
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddHostedService<Worker>();
-
+         
             services.AddScoped<IJwtHandler, JwtHandler>();
+
+            services.AddSingleton<IEmailService, EmailService>();
+
             services.AddScoped<IApplicationUser, ApplicationUser>();
 
             return services;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using ExpiredCardNotificationService;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -17,6 +18,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ProjectManagement.Application;
+using ProjectManagement.Application.Common.Interfaces;
+using ProjectManagement.Application.Model;
 using ProjectManagement.Infrastructure;
 
 
@@ -37,9 +40,12 @@ namespace ProjectManagement.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            
+            services.AddHostedService<Worker>();
             services.AddInfrastructure(Configuration, Environment);
             services.AddApplication();
+
+
+            services.AddSingleton<IEmailConfig>(Configuration.GetSection("EmailConfiguration").Get<EmailConfig>());
             //JWT
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
