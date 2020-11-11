@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProjectManagement.Application.Cards.Queries.GetAllCards
 {
-    public class GetCardListQueryHandler : IRequestHandler<GetCardListQuery,IEnumerable<Card>>
+    public class GetCardListQueryHandler : IRequestHandler<GetCardListQuery, IEnumerable<Card>>
     {
         private readonly ICardRepository _cardRepository;
         public GetCardListQueryHandler(ICardRepository cardRepository)
@@ -19,7 +19,7 @@ namespace ProjectManagement.Application.Cards.Queries.GetAllCards
 
         public async Task<IEnumerable<Card>> Handle(GetCardListQuery request, CancellationToken cancellationToken)
         {
-            var list =  _cardRepository.Get();
+            var list = _cardRepository.Get();
             return list;
         }
     }

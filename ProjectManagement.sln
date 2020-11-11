@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManagement.Applicati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManagement.API", "ProjectManagement.API\ProjectManagement.API.csproj", "{032A9A4D-05C9-45C9-AE6B-72CBC22B9F94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpiredCardNotificationService", "ExpiredCardNotificationService\ExpiredCardNotificationService.csproj", "{13B91F98-8C4E-4873-841C-C1BC62A7B01B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackgroundService", "BackgroundService", "{CF363A07-0ABD-4244-8710-A1F2AA4922C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,16 @@ Global
 		{032A9A4D-05C9-45C9-AE6B-72CBC22B9F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{032A9A4D-05C9-45C9-AE6B-72CBC22B9F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{032A9A4D-05C9-45C9-AE6B-72CBC22B9F94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13B91F98-8C4E-4873-841C-C1BC62A7B01B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13B91F98-8C4E-4873-841C-C1BC62A7B01B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13B91F98-8C4E-4873-841C-C1BC62A7B01B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13B91F98-8C4E-4873-841C-C1BC62A7B01B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{13B91F98-8C4E-4873-841C-C1BC62A7B01B} = {CF363A07-0ABD-4244-8710-A1F2AA4922C5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B20C0968-2EF1-4AD8-9113-ECBEA4BE229E}
