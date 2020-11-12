@@ -13,7 +13,7 @@ namespace ProjectManagement.Domain.Repositories
     {
         Task<Card> AddAsync(Card entity, CancellationToken token);
         IQueryable<Card> Get(Expression<Func<Card, bool>> predicate = null);
-
+        Task<Card> UpdateAsync(string id, Card entity);
 
 
     }

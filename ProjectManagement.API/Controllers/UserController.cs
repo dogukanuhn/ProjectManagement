@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using ProjectManagement.Application.Users.Commands.CreateUser;
 using ProjectManagement.Application.Users.Queries;
 
@@ -17,21 +18,33 @@ namespace ProjectManagement.API.Controllers
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public UserController(IMediator mediator)
+        private readonly ILogger<UserController> _logger;
+
+        public UserController(IMediator mediator,ILogger<UserController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [AllowAnonymous]
         [HttpPost("/Register")]
         public async Task<IActionResult> Register([FromBody]CreateUserCommand command)
         {
-            var user = await _mediator.Send(command);
+            try
+            {
+                var user = await _mediator.Send(command);
 
-            if (!user)
-                return BadRequest("error");
+                if (!user)
+                    return BadRequest("Some informations are missing or wrong");
 
-            return Ok("Success");
+                return Ok("User Created Succesfully");
+            }
+            catch (Exception exception)
+            {
+
+                    return BadRequest($"User Register Error : {exception.Message}");
+
+            }
 
         }
 
@@ -39,12 +52,23 @@ namespace ProjectManagement.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Authenticate([FromBody]AuthenticateUserQuery query)
         {
-            var user = await _mediator.Send(query);
+        
 
-            if (user == null)
-                return BadRequest("Username or password incorrect!");
+            try
+            {
+                var user = await _mediator.Send(query);
+                if (user == null)
+                    return BadRequest("Username or password incorrect!");
 
-            return Ok(new { Email = user.Value.email, Token = user.Value.token });
+                return Ok(new { Email = user.Value.email, Token = user.Value.token });
+
+            }
+            catch (Exception exception)
+            {
+
+                return BadRequest($"User Login Error : {exception.Message}");
+
+            }
 
         }
     }

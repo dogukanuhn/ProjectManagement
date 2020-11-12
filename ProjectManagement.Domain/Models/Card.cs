@@ -9,9 +9,16 @@ namespace ProjectManagement.Domain.Models
 {
     public class Card : BaseModelEntity
     {
+        public Card()
+        {
+            IsDone = false;
+            IsWarned = false;
+        }
+
         public string Title { get; set; }
         public string Content { get; set; }
         public bool IsDone { get; set; }
+        public bool IsWarned { get; set; }
         public string CreatedBy { get; set; }
 
         [BsonRepresentation(BsonType.DateTime)]

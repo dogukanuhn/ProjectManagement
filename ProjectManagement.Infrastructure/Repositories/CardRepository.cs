@@ -36,5 +36,10 @@ namespace ProjectManagement.Infrastructure.Repositories
                 ? _collection.AsQueryable()
                 : _collection.AsQueryable().Where(predicate);
         }
+
+        public  async Task<Card> UpdateAsync(string id, Card entity)
+        {
+            return await _collection.FindOneAndReplaceAsync(x => x.Id == id, entity);
+        }
     }
 }
