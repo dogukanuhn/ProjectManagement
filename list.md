@@ -1,0 +1,79 @@
+- 📂 **ExpiredCardNotificationService**
+  - 📄 [ExpiredCardNotificationService.csproj](ExpiredCardNotificationService/ExpiredCardNotificationService.csproj)
+  - 📄 [Program.cs](ExpiredCardNotificationService/Program.cs)
+  - 📂 **Properties**
+    - 📄 [launchSettings.json](ExpiredCardNotificationService/Properties/launchSettings.json)
+  - 📄 [Worker.cs](ExpiredCardNotificationService/Worker.cs)
+  - 📄 [appsettings.Development.json](ExpiredCardNotificationService/appsettings.Development.json)
+  - 📄 [appsettings.json](ExpiredCardNotificationService/appsettings.json)
+- 📂 **ProjectManagement.API**
+- 📂 **Controllers**
+  - 📄 [CardsController.cs](ProjectManagement.API/Controllers/CardsController.cs)
+  - 📄 [UserController.cs](ProjectManagement.API/Controllers/UserController.cs)
+- 📄 [Program.cs](ProjectManagement.API/Program.cs)
+- 📄 [ProjectManagement.API.csproj](ProjectManagement.API/ProjectManagement.API.csproj)
+- 📄 [ProjectManagement.API.csproj.user](ProjectManagement.API/ProjectManagement.API.csproj.user)
+- 📂 **Properties**
+  - 📄 [launchSettings.json](ProjectManagement.API/Properties/launchSettings.json)
+- 📄 [Startup.cs](ProjectManagement.API/Startup.cs)
+- 📄 [appsettings.Development.json](ProjectManagement.API/appsettings.Development.json)
+- 📄 [appsettings.json](ProjectManagement.API/appsettings.json)
+- 📂 **ProjectManagement.Application**
+- 📄 [AppSettings.cs](ProjectManagement.Application/AppSettings.cs)
+- 📂 **Cards**
+  - 📂 **Commands**
+    - 📂 **CreateCard**
+      - 📄 [CreateCardCommand.cs](ProjectManagement.Application/Cards/Commands/CreateCard/CreateCardCommand.cs)
+      - 📄 [CreateCardCommandHandler.cs](ProjectManagement.Application/Cards/Commands/CreateCard/CreateCardCommandHandler.cs)
+  - 📂 **Queries**
+    - 📂 **GetAllCards**
+      - 📄 [GetCardListQuery.cs](ProjectManagement.Application/Cards/Queries/GetAllCards/GetCardListQuery.cs)
+      - 📄 [GetCardListQueryHandler.cs](ProjectManagement.Application/Cards/Queries/GetAllCards/GetCardListQueryHandler.cs)
+- 📂 **Common**
+  - 📂 **Helpers**
+    - 📄 [ApplicationUser.cs](ProjectManagement.Application/Common/Helpers/ApplicationUser.cs)
+    - 📄 [JwtHandler.cs](ProjectManagement.Application/Common/Helpers/JwtHandler.cs)
+  - 📂 **Interfaces**
+    - 📄 [IEmailConfig.cs](ProjectManagement.Application/Common/Interfaces/IEmailConfig.cs)
+    - 📄 [IEmailService.cs](ProjectManagement.Application/Common/Interfaces/IEmailService.cs)
+    - 📄 [IMongoDBContext.cs](ProjectManagement.Application/Common/Interfaces/IMongoDBContext.cs)
+    - 📄 [IRepository.cs](ProjectManagement.Application/Common/Interfaces/IRepository.cs)
+- 📄 [DI.cs](ProjectManagement.Application/DI.cs)
+- 📂 **Model**
+  - 📄 [EmailAddress.cs](ProjectManagement.Application/Model/EmailAddress.cs)
+  - 📄 [EmailConfig.cs](ProjectManagement.Application/Model/EmailConfig.cs)
+  - 📄 [EmailMessage.cs](ProjectManagement.Application/Model/EmailMessage.cs)
+- 📄 [ProjectManagement.Application.csproj](ProjectManagement.Application/ProjectManagement.Application.csproj)
+- 📂 **Services**
+  - 📄 [EmailService.cs](ProjectManagement.Application/Services/EmailService.cs)
+- 📂 **Users**
+  - 📂 **Commands**
+    - 📂 **CreateUser**
+      - 📄 [CreateUserCommand.cs](ProjectManagement.Application/Users/Commands/CreateUser/CreateUserCommand.cs)
+      - 📄 [CreateUserCommandHandler.cs](ProjectManagement.Application/Users/Commands/CreateUser/CreateUserCommandHandler.cs)
+  - 📂 **Queries**
+    - 📂 **Authanticate**
+      - 📄 [AuthenticateUserQuery.cs](ProjectManagement.Application/Users/Queries/Authanticate/AuthenticateUserQuery.cs)
+      - 📄 [AuthenticateUserQueryHandler.cs](ProjectManagement.Application/Users/Queries/Authanticate/AuthenticateUserQueryHandler.cs)
+- 📂 **ProjectManagement.Domain**
+- 📂 **Common**
+  - 📄 [BaseModelEntity.cs](ProjectManagement.Domain/Common/BaseModelEntity.cs)
+  - 📄 [IApplicationUser.cs](ProjectManagement.Domain/Common/IApplicationUser.cs)
+  - 📄 [IBaseModel.cs](ProjectManagement.Domain/Common/IBaseModel.cs)
+  - 📄 [IJwtHandler.cs](ProjectManagement.Domain/Common/IJwtHandler.cs)
+- 📂 **Models**
+  - 📄 [Card.cs](ProjectManagement.Domain/Models/Card.cs)
+  - 📄 [User.cs](ProjectManagement.Domain/Models/User.cs)
+- 📄 [ProjectManagement.Domain.csproj](ProjectManagement.Domain/ProjectManagement.Domain.csproj)
+- 📂 **Repositories**
+  - 📄 [ICardRepository.cs](ProjectManagement.Domain/Repositories/ICardRepository.cs)
+  - 📄 [IUserRepository.cs](ProjectManagement.Domain/Repositories/IUserRepository.cs)
+- 📂 **ProjectManagement.Infrastructure**
+  - 📄 [DI.cs](ProjectManagement.Infrastructure/DI.cs)
+  - 📄 [MongoDbContext.cs](ProjectManagement.Infrastructure/MongoDbContext.cs)
+  - 📄 [MongoDbSettings.cs](ProjectManagement.Infrastructure/MongoDbSettings.cs)
+  - 📄 [ProjectManagement.Infrastructure.csproj](ProjectManagement.Infrastructure/ProjectManagement.Infrastructure.csproj)
+  - 📂 **Repositories**
+    - 📄 [CardRepository.cs](ProjectManagement.Infrastructure/Repositories/CardRepository.cs)
+    - 📄 [UserRepository.cs](ProjectManagement.Infrastructure/Repositories/UserRepository.cs)
+  - 📄 [ProjectManagement.sln](ProjectManagement.sln)

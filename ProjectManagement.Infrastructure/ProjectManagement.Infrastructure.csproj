@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ExpiredCardNotificationService\ExpiredCardNotificationService.csproj" />
     <ProjectReference Include="..\ProjectManagement.Application\ProjectManagement.Application.csproj" />
     <ProjectReference Include="..\ProjectManagement.Domain\ProjectManagement.Domain.csproj" />
   </ItemGroup>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using ProjectManagement.Domain.Repositories;
 using ProjectManagement.Infrastructure.Repositories;
 using ProjectManagement.Application.Common.Interfaces;
+using ExpiredCardNotificationService;
 
 namespace ProjectManagement.Infrastructure
 {
@@ -23,7 +24,7 @@ namespace ProjectManagement.Infrastructure
             });
 
             services.AddScoped<IUserRepository, UserRepository>();
-
+            services.AddHostedService<Worker>();
             services.AddScoped<ICardRepository, CardRepository>();
             services.AddScoped(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
 

@@ -40,7 +40,7 @@ namespace ProjectManagement.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddHostedService<Worker>();
+            
             services.AddInfrastructure(Configuration, Environment);
             services.AddApplication();
 
