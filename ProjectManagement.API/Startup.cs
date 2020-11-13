@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ProjectManagement.Application;
+using ProjectManagement.Application.Common.Helpers;
 using ProjectManagement.Application.Common.Interfaces;
 using ProjectManagement.Application.Model;
 using ProjectManagement.Infrastructure;
@@ -46,10 +47,13 @@ namespace ProjectManagement.API
 
 
             services.AddSingleton<IEmailConfig>(Configuration.GetSection("EmailConfiguration").Get<EmailConfig>());
+
+
+
+            #region JWT
             //JWT
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
-
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.SecretKey);
 
@@ -61,25 +65,30 @@ namespace ProjectManagement.API
                //JWT kullanacaðým ve ayarlarý da þunlar olsun dediðimiz yer ise burasýdýr.
                .AddJwtBearer(x =>
                {
-                    //Gelen isteklerin sadece HTTPS yani SSL sertifikasý olanlarý kabul etmesi(varsayýlan true)
-                    x.RequireHttpsMetadata = false;
-                    //Eðer token onaylanmýþ ise sunucu tarafýnda kayýt edilir.
-                    x.SaveToken = true;
-                    //Token içinde neleri kontrol edeceðimizin ayarlarý.
-                    x.TokenValidationParameters = new TokenValidationParameters
+                   //Gelen isteklerin sadece HTTPS yani SSL sertifikasý olanlarý kabul etmesi(varsayýlan true)
+                   x.RequireHttpsMetadata = false;
+                   //Eðer token onaylanmýþ ise sunucu tarafýnda kayýt edilir.
+                   x.SaveToken = true;
+                   //Token içinde neleri kontrol edeceðimizin ayarlarý.
+                   x.TokenValidationParameters = new TokenValidationParameters
                    {
-                        //Token 3.kýsým(imza) kontrolü
-                        ValidateIssuerSigningKey = true,
-                        //Neyle kontrol etmesi gerektigi
-                        IssuerSigningKey = new SymmetricSecurityKey(key),
-                        //Bu iki ayar ise "aud" ve "iss" claimlerini kontrol edelim mi diye soruyor
-                        ValidateIssuer = false,
+                       //Token 3.kýsým(imza) kontrolü
+                       ValidateIssuerSigningKey = true,
+                       //Neyle kontrol etmesi gerektigi
+                       IssuerSigningKey = new SymmetricSecurityKey(key),
+                       //Bu iki ayar ise "aud" ve "iss" claimlerini kontrol edelim mi diye soruyor
+                       ValidateIssuer = false,
                        ValidateAudience = false
                    };
                });
+
+            #endregion
+
             services.AddHttpContextAccessor();
             services.AddHealthChecks();
             services.AddControllers();
+
+            #region SWAGGER
             services.AddSwaggerGen(c => {
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -112,6 +121,8 @@ namespace ProjectManagement.API
         });
 
             });
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

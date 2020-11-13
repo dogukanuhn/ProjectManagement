@@ -12,7 +12,7 @@ using ProjectManagement.Application.Cards.Queries.GetAllCards;
 
 namespace ProjectManagement.API.Controllers
 {
-    [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class CardsController : ControllerBase
@@ -29,18 +29,12 @@ namespace ProjectManagement.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            try
-            {
+     
                 var list = await _mediator.Send(new GetCardListQuery());
-                _logger.LogInformation($"Card Get Succesfully");
+
 
                 return Ok(list);
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError($"Get Cards Error:{exception.Message}");
-                return BadRequest(exception.Message);
-            }
+
 
 
             
@@ -50,18 +44,11 @@ namespace ProjectManagement.API.Controllers
         public async Task<ActionResult<string>> Create([FromBody] CreateCardCommand command)
         {
 
-            try
-            {
+    
                 string productId = await _mediator.Send(command);
-                _logger.LogInformation($"Card Created Succesfully");
+            
                 return Ok(productId);
 
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError($"Create Card Error:{exception.Message}");
-                return BadRequest(exception.Message);
-            }
 
         }
     }

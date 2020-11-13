@@ -5,6 +5,9 @@ using ProjectManagement.Domain.Common;
 using ProjectManagement.Application.Common.Helpers;
 using ProjectManagement.Application.Common.Interfaces;
 using ProjectManagement.Application.Services;
+using ProjectManagement.Application.PipelineBehaviours;
+using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ProjectManagement.Application
 {
@@ -20,6 +23,15 @@ namespace ProjectManagement.Application
             services.AddSingleton<IEmailService, EmailService>();
 
             services.AddScoped<IApplicationUser, ApplicationUser>();
+
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+
+   
+
+        
 
             return services;
         }
