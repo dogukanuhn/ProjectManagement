@@ -12,6 +12,7 @@ using ProjectManagement.Application.Users.Queries;
 
 namespace ProjectManagement.API.Controllers
 {
+    [AllowAnonymous]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -26,7 +27,7 @@ namespace ProjectManagement.API.Controllers
             _logger = logger;
         }
 
-        [AllowAnonymous]
+        
         [HttpPost("/Register")]
         public async Task<IActionResult> Register([FromBody]CreateUserCommand command)
         {
@@ -48,7 +49,7 @@ namespace ProjectManagement.API.Controllers
 
         }
 
-        [AllowAnonymous]
+        
         [HttpPost("login")]
         public async Task<IActionResult> Authenticate([FromBody]AuthenticateUserQuery query)
         {
