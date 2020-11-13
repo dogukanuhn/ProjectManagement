@@ -12,7 +12,7 @@ using ProjectManagement.Application.Cards.Queries.GetAllCards;
 
 namespace ProjectManagement.API.Controllers
 {
-
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CardsController : ControllerBase
